@@ -1,6 +1,3 @@
-" ==============================================================================
-" General Settings & System Defaults
-" ==============================================================================
 " Source system default behavior if present
 unlet! g:skip_defaults_vim
 if filereadable($VIMRUNTIME . '/defaults.vim')
@@ -71,6 +68,7 @@ set cursorline
 
 " Refresh vim config with F5
 noremap <silent> <F5> :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+
 " ==============================================================================
 " Native File Explorer (netrw)
 " ==============================================================================
@@ -97,7 +95,7 @@ set encoding=utf-8          " Set default internal character encoding
 set fileformats=unix,dos,mac " Prefer Unix line endings (\n)
 
 " ==============================================================================
-" Dynamic Color Scheme Switcher (Built-in Themes Only)
+" Dynamic Color Scheme Switcher
 " ==============================================================================
 function! NextColorScheme(step)
   if !exists('g:colo_list')

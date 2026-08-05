@@ -18,6 +18,7 @@ set tabstop=4                " Default to 4 spaces
 set shiftwidth=4
 set softtabstop=4
 set autoindent
+set cursorline
 
 " Disable backup / swap files on remote servers
 set nobackup
@@ -31,7 +32,7 @@ augroup FiletypeIndentation
   autocmd!
 
   " 2-space indentation (YAML, Ansible, JSON, HTML)
-  autocmd FileType yaml,yml,raml,json,html,css setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+  autocmd FileType yaml,yml,raml,json,html,css,terraform,tf setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 
   " 4-space indentation (Bash, Python, Dockerfile)
   autocmd FileType sh,bash,python,dockerfile  setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
@@ -45,6 +46,7 @@ let mapleader = " "
 " Space + q, Space + w
 nnoremap <leader>q :q<CR>
 nnoremap <leader>w :w<CR>
+nnoremap <silent> <leader>c :nohlsearch<CR>
 
 " Navigate splits using Space + Arrows
 nnoremap <silent> <leader><Up>    :wincmd k<CR>
@@ -58,13 +60,15 @@ nnoremap <silent> <leader>j :wincmd j<CR>
 nnoremap <silent> <leader>h :wincmd h<CR>
 nnoremap <silent> <leader>l :wincmd l<CR>
 
+" Resize splits easily using Alt + Shift + Arrow keys
+nnoremap <silent> <M-S-Up>    :resize +3<CR>
+nnoremap <silent> <M-S-Down>  :resize -3<CR>
+nnoremap <silent> <M-S-Left>  :vertical resize -3<CR>
+nnoremap <silent> <M-S-Right> :vertical resize +3<CR>
+
 " Switch buffers using F4
 nnoremap <F4> :buffers<CR>:buffer<Space>
 
-nnoremap <silent> <leader>c :nohlsearch<CR>
-
-" Set the cursorline
-set cursorline
 
 " Refresh vim config with F5
 noremap <silent> <F5> :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>

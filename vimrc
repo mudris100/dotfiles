@@ -69,6 +69,9 @@ nnoremap <silent> <M-S-Right> :vertical resize +3<CR>
 " Switch buffers using F4
 nnoremap <F4> :buffers<CR>:buffer<Space>
 
+" Switch buffers using ctrl+left or ctrl+right
+map <C-left> <ESC>:bp<CR>
+map <C-right> <ESC>:bn<CR>
 
 " Refresh vim config with F5
 noremap <silent> <F5> :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>

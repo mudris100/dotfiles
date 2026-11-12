@@ -1,0 +1,56 @@
+# vim: set filetype=sh:
+colors() {
+    for i in {0..255}
+    do printf '\e[38;5;%dm%3d\e[0m ' "$i" "$i"; (( (i+1) % 16 == 0 )) && echo
+    done
+    }
+
+function externalip() { curl -4 -sS --max-time 5 https://icanhazip.com; }
+
+cd() {
+    builtin cd "$@" && ls -CF
+}
+
+make-prompt() {
+    local rst='\[\e[0m\]' bold='\[\e[1m\]'
+    local c_user='\[\e[38;5;37m\]'
+    local c_host='\[\e[38;5;114m\]'
+    local c_path='\[\e[38;5;183m\]'
+
+    PS1="${bold}${c_user}\u${rst}@${c_host}\h${rst}:${c_path}\w${rst}\$ "
+}
+make-prompt
+
+truecolor-rainbow() {
+    local cols=${COLUMNS:-$(tput cols 2>/dev/null || echo 80)}
+    local i h x r g b
+
+    for (( i = 0; i < cols; i++ )); do
+        h=$(( i * 360 / cols ))
+        x=$(( (h % 60) * 255 / 60 ))
+
+        case $(( h / 60 )) in
+            0) r=255;        g=$x;         b=0   ;;
+            1) r=$((255-x)); g=255;        b=0   ;;
+            2) r=0;          g=255;        b=$x  ;;
+            3) r=0;          g=$((255-x)); b=255 ;;
+            4) r=$x;         g=0;          b=255 ;;
+            5) r=255;        g=0;          b=$((255-x)) ;;
+        esac
+
+        printf '\e[48;2;%d;%d;%dm ' "$r" "$g" "$b"
+    done
+}
+
+rainbow() {
+    local i r g b
+    for ((i = 0; i < 77; i++)); do
+        r=$((255 - (i * 255 / 76)))
+        g=$((i * 510 / 76))
+        b=$((i * 255 / 76))
+        ((g > 255)) && g=$((510 - g))
+        printf '\033[48;2;%d;%d;%dm ' "$r" "$g" "$b"
+    done
+    tput sgr0
+    echo
+}

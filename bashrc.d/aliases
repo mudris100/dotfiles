@@ -1,0 +1,10 @@
+# vim: set filetype=sh:
+alias gs='git status'
+alias c='clear'
+alias ports='ss -tnlp'
+alias e='vim -O'
+alias h='history'
+alias ..='cd ..'
+alias ...='cd ../../../'
+alias ee='echo $?'
+alias compactprompt='PS1="\[\e[38;5;222m\]\h\[\e[0m\]\[\e[38;5;36m\] \w\[\e[0m\] $ "'
